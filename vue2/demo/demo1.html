@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 会覆盖innerText内容 -->
+        <p v-text="nickname"></p>
+        <!-- 插值表达式 {{}}, 只能用于内容部分，不能使用在属性部分 -->
+        <p>{{nickname}}</p>
+        <!-- 可以写简单的表达式 -->
+        <p>{{nickname + sex}}</p>
+        <!-- 将标签渲染成html -->
+        <p v-html="h1"></p>
+        <!-- 属性绑定 v-bind   简写 ':' 如果内容为字符串加单引号 '' -->
+        <img :src="img" alt="">
+        <br>
+        <!-- 事件绑定 v-on 简写 '@'  -->
+        <button @click="btnHandler">{{num}}</button>
+        <!-- 如果传参了并且需要事件数，可以使用$evet做为参数一并传进去 -->
+        <button @click="alertHandler('arg',$event)">{{arg || 'clickz'}}</button>
+        <br>
+        <!-- 事件修饰符 prevent 阻止默认事件 stop 阻止冒泡  -->
+        <a href="" @click.prevent="showHandler">show</a>
+        <br>
+        <!-- 按键修饰符 enter esc -->
+        <input type="text" @keyup.enter="keyHandler">
+        <br>
+        <!-- v-model 双向绑定, 修饰符 number trim lazy -->
+        <select v-model="city">
+            <option value="">请选择城市</option>
+            <option value="2">上海</option>
+            <option value="3">上海2</option>
+            <option value="4">上海3</option>
+            <option value="5">上海4</option>
+        </select>
+        <br>
+
+        <label for="">
+            <input type="" v-model.number=num1>
+            +
+            <input type="" v-model.number=num2>
+            =
+            <input type="text" :value="num1 + num2">
+        </label>
+        <br>
+        <!-- 条件渲染 v-if （v-else-if  v-else） v-show  if是创建删除元素  show是dispaly 隐藏显示元素，频繁切换的话推荐使用show  -->
+        <div v-if="type === 'A'">优秀</div>
+        <div v-else-if="type === 'B'">良好</div>
+        <div v-else>差</div>
+        <ul>
+            <label for=""><input type="text" v-model="list_value"><button @click="addHandler">添加</button></label>
+            <li v-for="(i,index) in list" :key="index">
+                {{i.name}}
+                <button @click="delHandler(index)">删除</button>
+            </li>
+        </ul>
+        <br>
+        <!-- filter 过滤器 -->
+        <p>{{'ssadsad' | strFilter }}</p>
+        <!-- 全局过滤器 -->
+        <p>{{ 'AAAADDCC' | toLowerCase}}</p>
+        <input type="text" v-model="info.value">
+        <br>
+        <h2>输出rgb色值</h2>
+        <input type="text" v-model="r">
+        <input type="text" v-model="g">
+        <input type="text" v-model="b">
+        <div :style="`background-color:${this.rgb}; width:200px;height:200px `"></div>
+        <button @click="getAxiosHandler">请求</button>
+        <br>
+        <p v-if="res">
+            {{res.name}}
+        </p>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // 全局过滤器
+    Vue.filter('toLowerCase', (value) => value.toLowerCase())
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            nickname: 'nickname',
+            sex: '男',
+            h1: '<h1>h1111111</h1>',
+            img: "https://img.syt5.com/2021/0826/20210826090151418.jpg.420.420.jpg",
+            num: 0,
+            arg: '',
+            r: '',
+            g: '',
+            b: '',
+            city: '',
+            num1: 0,
+            num2: 0,
+            type: 'A',
+            list_value: '',
+            info: {
+                value: ''
+
+            },
+            list: [
+                {
+                    name: 'name1',
+                    age: '23'
+                },
+                {
+                    name: 'name2',
+                    age: '23'
+                },
+                {
+                    name: 'name3',
+                    age: '23'
+                },
+                {
+                    name: 'name4',
+                    age: '23'
+                }
+            ],
+            res: null
+        },
+        // 侦听器，如果想要进入页面第一次就触发需要使用对象形式,并且如果监听的数据是对象，也需要使用对象格式并且这设置deep
+        watch: {
+            // city(current, old) {
+            //     console.log(current);
+            // }    
+            city: {
+                handler(current, old) {
+                },
+                // 进入页面就触发一次
+                immediate: true,
+            },
+            info: {
+                handler(current) {
+                    console.log({ current });
+                },
+                deep: true
+            },
+            // 如果监听子属性，必须抱包一层单引号
+            'info.value'(a, b) {
+                console.log({ a, b });
+            }
+        },
+        methods: {
+            btnHandler(e) {
+                // 不传参数，默认传事件参数
+                this.num++
+            },
+            alertHandler(arg, eve) {
+
+                this.arg = arg
+            },
+            showHandler() {
+                console.log('show');
+
+            },
+            keyHandler() {
+                console.log(1);
+            },
+            addHandler() {
+                this.list.push({ name: this.list_value })
+            },
+            delHandler(index) {
+                this.list.splice(index, 1)
+            },
+            // axios请求示例  官网 https://axios-http.com/docs/intro
+            async getAxiosHandler() {
+                // get
+                const { data: res } = await axios.get('./demo.json', {
+                    params: {
+                        ID: 12345
+                    }
+                })
+                if (res) {
+                    this.res = res
+                }
+                // post
+                // const { data: res2 } = await axios.post('./demo.json', { id: 1 })
+                // axios({
+                //     methods:'GET',
+                //     url:'./demo.json'
+                // })
+                // Send a POST request
+                // axios({
+                //     method: 'post',
+                //     url: '/user/12345',
+                //     data: {
+                //         firstName: 'Fred',
+                //         lastName: 'Flintstone'
+                //     }
+                // });
+                console.log(res);
+            }
+        },
+        filters: {
+            strFilter(arg) {
+                return arg.toUpperCase()
+            }
+        },
+        // 计算属性
+        computed: {
+            rgb() {
+                return `rgb(${this.r},${this.g},${this.b})`
+            }
+        }
+    })
+</script>
+
+</html>
