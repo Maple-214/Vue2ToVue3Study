@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <CarHeaderVue title="购物车案例" />
+    <!-- 购物车案例 -->
+    <!-- <CarHeaderVue title="购物车案例" />
     <CarGoods
       @checkBoxHadnlder="checkBoxHadnlder"
       v-for="i in list"
@@ -13,7 +14,22 @@
       :totalPrice="totalPrice"
       :isFull="isFull"
       :totalNumber="totalNumber"
-    />
+    /> -->
+    <Slots>
+      <p>测试  slot</p>
+      <!-- 插到指定插槽上 v-slot简写# -->
+      <!-- <template v-slot:name1>
+        <div>
+          name1
+        </div>
+      </template> -->
+      <template #name1="scope">
+        <div>
+          name1 msg:{{ scope.msg }}
+        </div>
+      </template>
+    </Slots>
+    <Directives/>
   </div>
 </template>
 
@@ -21,6 +37,8 @@
 import CarHeaderVue from "@/components/CarHeader/CarHeader.vue";
 import CarGoods from "@/components/CarGoods/CarGoods.vue";
 import CarFooter from "@/components/CarFooter/CarFooter.vue";
+import Slots from "@/components/Slot/Slots.vue";
+import Directives from '@/components/Directives/Directives.vue';
 
 import HelloWorld from "./components/HelloWorld.vue";
 import axios from "axios";
@@ -32,6 +50,8 @@ export default {
     CarHeaderVue,
     CarGoods,
     CarFooter,
+    Slots,
+    Directives
   },
   data() {
     return {
