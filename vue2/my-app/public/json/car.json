@@ -1,0 +1,38 @@
+{
+    "status": 200,
+    "message": "suesses",
+    "list": [
+        {
+            "id": 1,
+            "goods_name": "name1",
+            "goods_img": "https://gw.alicdn.com/bao/uploaded/i1/2785650117/O1CN01cDrJqs1Cjd5NJwOTR_!!2785650117-0-picasso.jpg_300x300q90.jpg",
+            "goods_price": 20,
+            "goods_state": false,
+            "goods_count": 2
+        },
+        {
+            "id": 2,
+            "goods_name": "name2",
+            "goods_img": "https://gw.alicdn.com/bao/uploaded/i1/2785650117/O1CN01cDrJqs1Cjd5NJwOTR_!!2785650117-0-picasso.jpg_300x300q90.jpg",
+            "goods_price": 20,
+            "goods_state": false,
+            "goods_count": 2
+        },
+        {
+            "id": 3,
+            "goods_name": "name3",
+            "goods_img": "https://gw.alicdn.com/bao/uploaded/i1/2785650117/O1CN01cDrJqs1Cjd5NJwOTR_!!2785650117-0-picasso.jpg_300x300q90.jpg",
+            "goods_price": 20,
+            "goods_state": false,
+            "goods_count": 2
+        },
+        {
+            "id": 4,
+            "goods_name": "name4",
+            "goods_img": "https://gw.alicdn.com/bao/uploaded/i1/2785650117/O1CN01cDrJqs1Cjd5NJwOTR_!!2785650117-0-picasso.jpg_300x300q90.jpg",
+            "goods_price": 20,
+            "goods_state": false,
+            "goods_count": 2
+        }
+    ]
+}
