@@ -1,9 +1,10 @@
 <template lang="">
   <div>
     <div class="container">
-      <a href="#/a">a</a>
-      <a href="#/b">b</a>
-      <a href="#/c">c</a>
+      <router-link to="/A">a</router-link>
+      <router-link to="/B">b</router-link>
+      <router-link to="/C">c</router-link>
+
     </div>
     <!-- <component :is="MyComponent"></component> -->
     <router-view></router-view>

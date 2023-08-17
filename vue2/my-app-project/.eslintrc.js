@@ -15,5 +15,6 @@ module.exports = {
     semi: ["error", "always"], // 允许使用分号
     "comma-dangle": ["error", "always-multiline"], // 允许多行时末尾逗号
     "space-before-function-paren": "off", // 关闭 "Missing space before function parentheses" 规则
+    "spaced-comment": "off", // 关闭 spaced-comment 规则
   },
 };
