@@ -7,6 +7,7 @@ const routes = [
   {
     path: "/",
     name: "home",
+    meta: { isRecord: true, top: 0, keepAlive: true },
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/Home/home.vue"),
   },
@@ -23,6 +24,16 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // 组件切换保留原先滚动位置
+    console.log({ to, from, savedPosition });
+    // return 期望滚动到的位置
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: to.meta.top || 0 };
+    }
+  },
 });
 
 export default router;

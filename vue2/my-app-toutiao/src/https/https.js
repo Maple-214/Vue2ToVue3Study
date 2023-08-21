@@ -1,7 +1,7 @@
 // http.js
 import axios from "axios";
 // 创建 Axios 实例
-console.log(process.env);
+// console.log(process.env);
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // 设置基础 URL
