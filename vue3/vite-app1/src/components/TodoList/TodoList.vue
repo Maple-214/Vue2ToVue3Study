@@ -3,30 +3,25 @@
     <ul class="list-group">
       <li
         class="list-group-item d-flex justify-content-between align-items-center"
+        v-for="i in list"
+        :key="i.id"
       >
         <div class="custom-control custom-checkbox">
           <input
             type="checkbox"
             class="custom-control-input"
-            id="customCheck1"
-            name=""
+            v-model="i.done"
+            :id="i.id"
           />
-          <label class="custom-control-label" for="">22222</label>
+          <label
+            class="custom-control-label"
+            :class="i.done ? 'delete' : ''"
+            :for="i.id"
+            >{{ i.task }}</label
+          >
         </div>
-        A list item
-        <span class="badge badge-primary badge-pill">14</span>
-      </li>
-      <li
-        class="list-group-item d-flex justify-content-between align-items-center"
-      >
-        A second list item
-        <span class="badge badge-primary badge-pill">2</span>
-      </li>
-      <li
-        class="list-group-item d-flex justify-content-between align-items-center"
-      >
-        A third list item
-        <span class="badge badge-primary badge-pill">1</span>
+        <span v-if="i.done" class="badge badge-success badge-pill">完成</span>
+        <span v-else class="badge badge-warning badge-pill">未完成</span>
       </li>
     </ul>
   </div>
@@ -43,13 +38,12 @@ export default {
 };
 </script>
 <style lang="less">
-.badge-primary {
-  color: #fff;
-  background-color: #007bff;
+.list-group {
+  width: 400px;
 }
-.badge-pill {
-  padding-right: 0.6em;
-  padding-left: 0.6em;
-  border-radius: 10rem;
+.delete {
+  text-decoration: line-through;
+  color: gray;
+  font-style: italic;
 }
 </style>
