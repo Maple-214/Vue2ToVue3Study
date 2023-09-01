@@ -6,8 +6,10 @@
   <!-- <MyHeader /> -->
   <div>
     <TodoInput @onSubmitHandler="onSubmitHandler" />
-    <TodoList :list="todoList" />
-    <TodoBtn @onActiveHandler="onActiveHandler" :active="active" />
+    <TodoList :list="list" />
+    <!-- <TodoBtn @onActiveHandler="onActiveHandler" :active="active" /> -->
+    <TodoBtn v-model:active="active" />
+    <!-- <VModel/> -->
   </div>
 </template>
 
@@ -16,6 +18,7 @@
 import TodoList from "./components/TodoList/TodoList.vue";
 import TodoInput from "./components/TodoList/TodoInput.vue";
 import TodoBtn from "./components/TodoList/TodoBtn.vue";
+import VModel from "./components/VModel/VModel.vue";
 
 export default {
   name: "App",
@@ -24,6 +27,7 @@ export default {
     TodoList,
     TodoInput,
     TodoBtn,
+    VModel
   },
   data() {
     return {
@@ -47,6 +51,20 @@ export default {
     },
     onActiveHandler(val) {
       this.active = val;
+    },
+  },
+  computed: {
+    list() {
+      switch (this.active) {
+        case 0:
+          return this.todoList;
+        case 1:
+          return this.todoList.filter((i) => i.done === true);
+        case 2:
+          return this.todoList.filter((i) => i.done !== true);
+        default:
+          break;
+      }
     },
   },
 };

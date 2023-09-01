@@ -8,7 +8,7 @@
 export default {
     directives:{
         // bgColor:{
-        //     // 只生效一次
+        //     // 只生效一次，在vue3中bind对应mounted updated对应update
         //     bind(el,binding){
         //         console.log(binding);
         //         el.style.color = binding.value

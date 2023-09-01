@@ -30,18 +30,23 @@
 </template>
 <script>
 export default {
-  props: {
-    emits: ["update:onActiveHandler"],
-    active: {
-      type: Number,
-      default: 0,
-      require: true,
-    },
-  },
+  emits: ["update:active"],
+  props:["active"],
+  // props: {
+  //   active: {
+  //     type: Number,
+  //     default: 0,
+  //     require: true,
+  //   },
+  // },
   methods: {
+    // onActiveHandler(val) {
+    //   if (val === this.active) return;
+    //   this.$emit("onActiveHandler", val);
+    // },
     onActiveHandler(val) {
       if (val === this.active) return;
-      this.$emit("update:onActiveHandler", val);
+      this.$emit("update:active", val);
     },
   },
 };
