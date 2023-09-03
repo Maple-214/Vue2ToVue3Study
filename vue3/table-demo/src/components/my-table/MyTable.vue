@@ -8,7 +8,7 @@
     </thead>
     <!-- 内容主体区域 -->
     <tbody>
-      <tr v-for="(i,index ) in data" :key="i.id">
+      <tr v-for="(i, index) in data" :key="i.id">
         <slot name="TBody" :row="i" :index="index"></slot>
       </tr>
     </tbody>
